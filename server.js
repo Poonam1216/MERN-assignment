@@ -6,7 +6,7 @@ const app = express();
 
 // Middleware
 app.use(express.json());
-app.use(cors()); // Enable CORS
+app.use(cors());
 
 // MongoDB connection
 mongoose
@@ -30,7 +30,7 @@ const User = mongoose.model("User", userSchema);
 // Routes
 app.get("/users", async (req, res) => {
 	try {
-		const users = await User.find(); // Fetch all users from the database
+		const users = await User.find();
 		res.json(users);
 	} catch (error) {
 		res.status(500).json({ message: "Error fetching users" });
@@ -41,7 +41,7 @@ app.post("/users", async (req, res) => {
 	try {
 		const { name, email, age } = req.body;
 		const newUser = new User({ name, email, age });
-		await newUser.save(); // Save the new user to the database
+		await newUser.save();
 		res.status(201).json(newUser);
 	} catch (error) {
 		res.status(400).json({ message: "Error creating user" });
